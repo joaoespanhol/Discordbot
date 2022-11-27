@@ -1,0 +1,6 @@
+name: Discord
+version: '${project.version}'
+main: me.djjewl.test.discord.Discord
+api-version: 1.19
+authors: [ DjJewl ]
+description: A basic Discord Bot For FoxyCraft

@@ -11,34 +11,21 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.jetbrains.annotations.NotNull;
 
 public class discordbot extends ListenerAdapter {
-    public static void botload(String args){
-        JDABuilder builder = JDABuilder.createDefault(args);
 
-        // Disable parts of the cache
-        builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
-        // Enable the bulk delete event
-        builder.setBulkDeleteSplittingEnabled(false);
-        // Disable compression (not recommended)
-        builder.setCompression(Compression.NONE);
-        // Set activity (like "playing Something")
-        builder.setActivity(Activity.watching("FoxyCraft"));
 
-        builder.build();
-        //Commands
-
-        Commands.slash("tplayerlist","Test PlayerliSt for bot recode.")
-                .setGuildOnly(true); // this doesn't make sense in DMs
-
+    public static void botload(String args) {
+        if(args == null) {
+            throw new RuntimeException("the discord Token is NULL please Provide discord token in config");
+        }
+        else {
+            JDA api = JDABuilder.createDefault(args).disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE).setBulkDeleteSplittingEnabled(false).setActivity(Activity.watching("FC-Developement")).build();
+            api.updateCommands().addCommands(Commands.slash("tplayerlist", "Test PlayerliSt for bot recode.").setGuildOnly(true)).queue();
+        }
     }
 
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event){
-        if (event.getGuild() == null)
-            return;
-        switch (event.getName()){
-            case "tplayerlist":
-                event.reply("WIP");
-            default:
-            event.reply("I can't handle that command right now :(").setEphemeral(true).queue();
+    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event){
+        if (event.getName().equals("tplayerlist")) {
+            event.reply(event.getOption("WIP").getAsString()).queue(); // reply immediately
     }
     }
 }

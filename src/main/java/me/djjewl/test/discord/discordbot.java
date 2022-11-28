@@ -6,9 +6,8 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import net.dv8tion.jda.api.utils.Compression;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.jetbrains.annotations.NotNull;
+
 
 public class discordbot extends ListenerAdapter {
 
@@ -23,7 +22,7 @@ public class discordbot extends ListenerAdapter {
         }
     }
 
-    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event){
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent event){
         if (event.getName().equals("tplayerlist")) {
             event.reply(event.getOption("WIP").getAsString()).queue(); // reply immediately
     }

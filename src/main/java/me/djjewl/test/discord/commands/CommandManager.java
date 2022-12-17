@@ -5,9 +5,16 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;
+import java.io.*;
+import java.net.*;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.*;
+import org.json.*;
 
 import org.jetbrains.annotations.NotNull;
-
+import org.json.simple.JSONObject;
 
 
 import static org.bukkit.Bukkit.getServer;
@@ -33,6 +40,15 @@ public class CommandManager extends ListenerAdapter {
             String uuid = String.valueOf(Bukkit.getOfflinePlayer(user).getUniqueId());
             event.reply(user+" UUID: "+uuid).setEphemeral(true).queue();
         }
+        //          DjJewl-12-16-2022 / 9"56
+        //Will Return the latest Version Of magma for either 1.18.2 or 1.12.2
+        //[WARNING]Not Yet Added to the Registerd COMMANDS as I need to make the HTTP request
+       if(command.equals("magma-version")){
+           String version = event.getOption("version").getAsString();
+           if(version != "1.18.2" || version != "1.12.2"){
+           }
+       }
+
     }
     //          DjJewl-12-16-2022 / 5:10
     //watches the Discord For MessageReceived Events

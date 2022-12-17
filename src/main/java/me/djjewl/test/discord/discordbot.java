@@ -21,7 +21,11 @@ public class discordbot extends ListenerAdapter {
         }
         else {
             JDA api = JDABuilder.createDefault(args).disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE).setBulkDeleteSplittingEnabled(false).setActivity(Activity.watching("FC-Developement")).build();
-            api.updateCommands().addCommands(Commands.slash("tplayerlist", "Test PlayerliSt for bot recode.").setGuildOnly(true)).addCommands(Commands.slash("user-uuid", "Gets the UUID of a Username!").addOption(OptionType.STRING, "username","Give the Username of the player.", true).setGuildOnly(true)).queue();
+            api.updateCommands().addCommands(Commands.slash("tplayerlist", "Test PlayerliSt for bot recode.").setGuildOnly(true))
+                    .addCommands(Commands.slash("user-uuid", "Gets the UUID of a Username!")
+                            .addOption(OptionType.STRING, "username","Give the Username of the player.", true).setGuildOnly(true))
+                    .addCommands(Commands.slash("magma-version", "Returns latest Version Of magma for specified version")
+                                    .addOption(OptionType.STRING, "version","Version of Minecraft",true,true)).queue();
             api.addEventListener(new CommandManager());
         }
     }

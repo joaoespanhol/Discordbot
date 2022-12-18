@@ -4,18 +4,17 @@ import me.djjewl.test.discord.commands.CommandManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.channel.attribute.IGuildChannelContainer;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import org.bukkit.Bukkit;
+
+import java.util.logging.Level;
 
 
-public class discordbot extends ListenerAdapter {
+public class discordbot {
 
     private static JDA api;
     public static void botload() {
@@ -44,8 +43,8 @@ public class discordbot extends ListenerAdapter {
     public static void discordMsg(String message)
     {
         MessageChannel channel = api.getTextChannelById(sconfig.ChatId);
-        assert channel != null;
         channel.sendMessage(message).queue();
+        Bukkit.getLogger().log(Level.SEVERE,message);
 
     }
 }

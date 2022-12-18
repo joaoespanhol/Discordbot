@@ -3,6 +3,7 @@ package me.djjewl.test.discord.events;
 
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import static me.djjewl.test.discord.discordbot.discordMsg;
 
 
-public class chatevents {
+public class chatevents implements Listener {
 
     //          DjJewl-12-16-2022 / 5:08
     //On player Chat Send Chat Message to Discord.

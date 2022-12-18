@@ -1,5 +1,5 @@
 name: Foxy-DiscordBot
-version: '1.1'
+version: '${project.version}'
 main: me.djjewl.main.discord.Main
 api-version: 1.18
 authors: [ DjJewl ]

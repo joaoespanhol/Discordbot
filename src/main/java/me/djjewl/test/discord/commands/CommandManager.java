@@ -1,6 +1,9 @@
 package me.djjewl.test.discord.commands;
 
+
+import com.google.gson.JsonElement;
 import me.djjewl.test.discord.http.magmarequest;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,13 +12,15 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 import org.bukkit.Bukkit;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.JSONObject;
 
 
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.bukkit.Bukkit.getLogger;
 import static org.bukkit.Bukkit.getServer;
 
 public class CommandManager extends ListenerAdapter {
@@ -41,14 +46,20 @@ public class CommandManager extends ListenerAdapter {
             String uuid = String.valueOf(Bukkit.getOfflinePlayer(user).getUniqueId());
             event.reply(user+" UUID: "+uuid).setEphemeral(true).queue();
         }
-        //          DjJewl-12-16-2022 / 9:56PM
-        //Will Return the latest Version Of magma for either 1.18.2 or 1.12.2
-        //[WARNING]Not Yet Added to the Registerd COMMANDS as I need to make the HTTP request
+
+        //          DjJewl-12-17-2022 / 7:06PM
+        //Returns the latest Version Of magma for either 1.18.2 or 1.12.2 and the GitLab Link
        if(command.equals("magma-version")){
            String version = event.getOption("version").getAsString();
             if(version.equals("1.18.2") || version.equals("1.12.2")) {
-                String Response = String.valueOf(magmarequest.mvrequest(version));
-                event.reply(Response).queue();
+                JsonElement Response = magmarequest.mvrequest(version);
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.setTitle("Magma Version : "+version);
+                eb.addField("Magma "+version+" Download", "[Download]"+"("+(Response.getAsJsonObject().get("link").getAsString().replaceAll("\"", ""))+")", false);
+                eb.addField("Magma "+version+" Changes", "[GitLab]"+"("+(Response.getAsJsonObject().get("git_commit_url").getAsString().replaceAll("\"", ""))+")", false);
+                eb.setAuthor("Magma", "https://magmafoundation.org/", "https://magmafoundation.org/images/magma-logo.png");
+                eb.setFooter("Ownership of Files/Logo To Magma Development");
+                event.replyEmbeds(eb.build()).queue();
             }
        }
 

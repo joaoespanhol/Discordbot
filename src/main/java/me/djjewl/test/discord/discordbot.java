@@ -16,6 +16,8 @@ public class discordbot extends ListenerAdapter {
     public static void botload(String args) {
         //          DjJewl-12-16-2022 / 5:15
         //Checks If the Discord Token In config is NULL If it is not NULL it will Go ahead and Build the Discord Bot
+            //          DjJewl-12-17-2022 / 7:10PM
+            //Added the magma-versionCommand and added the autoComplete in CommandManager
         if(args == null) {
             throw new RuntimeException("the discord Token is NULL please Provide discord token in config");
         }
@@ -35,5 +37,6 @@ public class discordbot extends ListenerAdapter {
     public static void discordMsg(String message ) {
 
     }
+
 }
 

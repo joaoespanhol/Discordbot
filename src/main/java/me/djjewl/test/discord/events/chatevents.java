@@ -45,10 +45,4 @@ public class chatevents {
     public void onPlayerDead(PlayerDeathEvent event) {
         discordMsg(event.getDeathMessage());
     }
-
-
-
-
-
-
 }

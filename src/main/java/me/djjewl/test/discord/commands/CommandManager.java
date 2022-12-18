@@ -72,7 +72,9 @@ public class CommandManager extends ListenerAdapter {
         //          DjJewl-12-16-2022 / 5:11PM
         //Checks channel ID,Then Sends Message In channel to Minecraft
         if (event.getChannel().getId().equals("1035295383359864902")){
-            getServer( ).broadcastMessage(event.getAuthor().getName()+" >> "+event.getMessage().getContentDisplay());
+            if(!event.getAuthor().isBot()) {
+                getServer().broadcastMessage(event.getAuthor().getName() + " >> " + event.getMessage().getContentDisplay());
+            }
         }
     }
     //          DjJewl-12-17-2022 / 9:30AM

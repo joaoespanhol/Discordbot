@@ -83,7 +83,7 @@
         <dependency>
             <groupId>com.github.JustRed23</groupId>
             <artifactId>ABCM</artifactId>
-            <version>1.2</version>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>

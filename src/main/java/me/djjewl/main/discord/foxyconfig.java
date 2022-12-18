@@ -16,7 +16,7 @@ public final class foxyconfig {
     @ConfigField(defaultValue = "false",description = "used to TroubleShoot some issues,This is still Under Work tho")
     public static boolean Debug;
 
-    @ConfigField(defaultValue = "#user >> #message",description = "Formats the discord to minecraft (you can change chat colors here to using default minecraft color codes,THIS IS NOT CURRENTLY WORKING.")
+    @ConfigField(defaultValue = "#user# >> #message#",description = "Formats the discord to minecraft (you can change chat colors here to using default minecraft color codes,THIS IS NOT CURRENTLY WORKING.")
     public static String discord_to_minecraft;
 
 }

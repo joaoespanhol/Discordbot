@@ -12,9 +12,11 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
+import org.apache.commons.lang.text.StrSubstitutor;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,11 +66,19 @@ public class CommandManager extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
-        //          DjJewl-12-16-2022 / 5:11PM
+        //          DjJewl-12-18-2022 / 10:50AM
         //Checks channel ID,Then Sends Message In channel to Minecraft
         if (event.getChannel().getId().equals(foxyconfig.ChatId)){
+            //Placeholder Using maps
             if (event.getAuthor().isBot()) return;
-            getServer().broadcastMessage(event.getAuthor().getName() + " >> " + event.getMessage().getContentDisplay());
+            String format = foxyconfig.discord_to_minecraft;
+            Map<String, Object> replacementStrings = Map.of(
+                    "user", event.getAuthor().getName(),
+                    "message", event.getMessage().getContentDisplay()
+            );
+            StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
+            String result = sub.replace(format );
+            getServer().broadcastMessage(result);
 
         }//end of Message Reacived
     }

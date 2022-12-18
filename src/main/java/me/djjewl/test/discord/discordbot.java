@@ -35,16 +35,14 @@ public class discordbot {
             api.addEventListener(new CommandManager());
         }
     }
-    //          DjJewl-12-16-2022 / 5:17
-    //Moved From events/chatevents to me.djjewl.test.discord.discordbot
-    //This will send all messages from events/chatevents to discord
-    //HAVING ISSUES GETTING IT TO SEND MESSAGES TO DISCORD NEED HELP ON THIS
-
+    //          DjJewl-12-17-2022 / 9:36PM
+    //send all messages from events/chatevents to discord
     public static void discordMsg(String message)
     {
         MessageChannel channel = api.getTextChannelById(sconfig.ChatId);
         channel.sendMessage(message).queue();
-        Bukkit.getLogger().log(Level.SEVERE,message);
+        //The line below is debug code
+        //Bukkit.getLogger().log(Level.SEVERE,message);
 
     }
 }

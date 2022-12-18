@@ -1,4 +1,4 @@
-package me.djjewl.test.discord.http;
+package me.djjewl.main.discord.http;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

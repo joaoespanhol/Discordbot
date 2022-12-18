@@ -1,15 +1,14 @@
-package me.djjewl.test.discord.events;
+package me.djjewl.main.discord.events;
 
 
 
+import me.djjewl.main.discord.discordbot;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import static me.djjewl.test.discord.discordbot.discordMsg;
 
 
 public class chatevents implements Listener {
@@ -19,7 +18,7 @@ public class chatevents implements Listener {
     @EventHandler
     public void chatEvent(AsyncPlayerChatEvent event) {
         String message = event.getPlayer().getName() + ": " + event.getMessage();
-        discordMsg(message);
+        discordbot.discordMsg(message);
     }
 
     //          DjJewl-12-16-2022 / 5:08
@@ -27,7 +26,7 @@ public class chatevents implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         String message = event.getPlayer().getName() + " Joined.";
-        discordMsg(message);
+        discordbot.discordMsg(message);
 
 
     }
@@ -37,13 +36,13 @@ public class chatevents implements Listener {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         String message = event.getPlayer().getName() + " Left. ";
-        discordMsg(message);
+        discordbot.discordMsg(message);
 
     }
     //          DjJewl-12-16-2022 / 5:07
     //On player Death Send DethMessage to discord Chat.
     @EventHandler
     public void onPlayerDead(PlayerDeathEvent event) {
-        discordMsg(event.getDeathMessage());
+        discordbot.discordMsg(event.getDeathMessage());
     }
 }

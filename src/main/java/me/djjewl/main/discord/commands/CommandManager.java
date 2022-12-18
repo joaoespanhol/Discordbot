@@ -1,22 +1,19 @@
-package me.djjewl.test.discord.commands;
+package me.djjewl.main.discord.commands;
 
 
 import com.google.gson.JsonElement;
-import me.djjewl.test.discord.http.magmarequest;
+import me.djjewl.main.discord.discordbot;
+import me.djjewl.main.discord.foxyconfig;
+import me.djjewl.main.discord.http.magmarequest;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
 import org.bukkit.Bukkit;
-
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.JSONObject;
-
-
-import java.awt.*;
-import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,18 +31,17 @@ public class CommandManager extends ListenerAdapter {
         String command = event.getName();
         //          DjJewl-12-16-2022 / 5:10PM
         //Returns Playerlist
-        if(command.equals("tplayerlist")){
+        if(command.equals("playerlist")){
             String players = String.valueOf(Bukkit.getOnlinePlayers().toString().replace("=","").replace("CraftPlayer","").replace("name","").replace("{","").replace("}",", "));
             event.reply("Playerlist!\n"+ players ).queue();
-
-        }
+        }//end of playerlist
         //          DjJewl-12-16-2022 / 5:09PM
         //Returns UUID of Player Name Inputted
         if(command.equals("user-uuid")){
             String user = event.getOption("username").getAsString();
             String uuid = String.valueOf(Bukkit.getOfflinePlayer(user).getUniqueId());
             event.reply(user+" UUID: "+uuid).setEphemeral(true).queue();
-        }
+        }//end of user-uuid
 
         //          DjJewl-12-17-2022 / 7:06PM
         //Returns the latest Version Of magma for either 1.18.2 or 1.12.2 and the GitLab Link
@@ -61,8 +57,7 @@ public class CommandManager extends ListenerAdapter {
                 eb.setFooter("Ownership of Files/Logo To Magma Development");
                 event.replyEmbeds(eb.build()).queue();
             }
-       }
-
+       }//end of magma-version command
     }
     //          DjJewl-12-16-2022 / 5:10
     //watches the Discord For MessageReceived Events
@@ -71,11 +66,11 @@ public class CommandManager extends ListenerAdapter {
     {
         //          DjJewl-12-16-2022 / 5:11PM
         //Checks channel ID,Then Sends Message In channel to Minecraft
-        if (event.getChannel().getId().equals("1035295383359864902")){
-            if(!event.getAuthor().isBot()) {
-                getServer().broadcastMessage(event.getAuthor().getName() + " >> " + event.getMessage().getContentDisplay());
-            }
-        }
+        if (event.getChannel().getId().equals(foxyconfig.ChatId)){
+            if (event.getAuthor().isBot()) return;
+            getServer().broadcastMessage(event.getAuthor().getName() + " >> " + event.getMessage().getContentDisplay());
+
+        }//end of Message Reacived
     }
     //          DjJewl-12-17-2022 / 9:30AM
     //AutoCompletes the Version Option For the User
@@ -88,4 +83,6 @@ public class CommandManager extends ListenerAdapter {
             event.replyChoices(options).queue();
         }
     }
+
+
 }

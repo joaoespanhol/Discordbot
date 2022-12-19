@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.requests.Response;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +59,13 @@ public class CommandManager extends ListenerAdapter {
                 event.replyEmbeds(eb.build()).queue();
             }
        }//end of magma-version command
+        //This will make a Embed that updates every 10 minutes with player count and if a server is on or not.
+        //wont be worked on further until i feel like doing it,as i will need to make a seperate config using JSON,as ABCM does not have support for lists.
+        if(command.equals("create-server-status")){
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Server Status");
+            event.replyEmbeds(eb.build()).queue();
+        }
     }
     //          DjJewl-12-16-2022 / 5:10
     //watches the Discord For MessageReceived Events
@@ -76,8 +84,9 @@ public class CommandManager extends ListenerAdapter {
             );
             StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
             String result = sub.replace(format );
-            //end of Placeholder map
+            //end of Placeholder mape
             getServer().broadcastMessage(result);
+
 
         }//end of Message Reacived
     }

@@ -4,6 +4,7 @@ import dev.JustRed23.abcm.exception.ConfigInitException;
 import me.djjewl.main.discord.configs.foxyconfig;
 import me.djjewl.main.discord.events.chatevents;
 import net.dv8tion.jda.api.JDA;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -31,7 +32,8 @@ public final class Main extends JavaPlugin {
         }
         //Register Events
         getServer().getPluginManager().registerEvents(new chatevents(), this);
-
+        int pluginId = 17114; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
         String message = "Server Started";
         discordbot.discordMsg(message);
 

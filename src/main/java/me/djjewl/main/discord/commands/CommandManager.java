@@ -2,14 +2,12 @@ package me.djjewl.main.discord.commands;
 
 
 import com.google.gson.JsonElement;
-import me.djjewl.main.discord.discordbot;
-import me.djjewl.main.discord.foxyconfig;
+import me.djjewl.main.discord.configs.foxyconfig;
 import me.djjewl.main.discord.http.magmarequest;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
 import org.apache.commons.lang.text.StrSubstitutor;
@@ -78,6 +76,7 @@ public class CommandManager extends ListenerAdapter {
             );
             StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
             String result = sub.replace(format );
+            //end of Placeholder map
             getServer().broadcastMessage(result);
 
         }//end of Message Reacived

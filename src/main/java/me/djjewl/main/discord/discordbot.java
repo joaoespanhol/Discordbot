@@ -1,6 +1,7 @@
 package me.djjewl.main.discord;
 
 import me.djjewl.main.discord.commands.CommandManager;
+import me.djjewl.main.discord.configs.foxyconfig;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -9,12 +10,9 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 
 
@@ -36,7 +34,6 @@ public class discordbot {
                             .addOption(OptionType.STRING, "username","Give the Username of the player.", true).setGuildOnly(true))
                     .addCommands(Commands.slash("magma-version", "Returns latest Version Of magma for specified version")
                                     .addOption(OptionType.STRING, "version","Version of Minecraft",true,true)).queue();
-
             api.addEventListener(new CommandManager());
             api.awaitReady();
         }

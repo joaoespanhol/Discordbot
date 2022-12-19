@@ -1,14 +1,10 @@
 package me.djjewl.main.discord;
 import dev.JustRed23.abcm.Config;
 import dev.JustRed23.abcm.exception.ConfigInitException;
+import me.djjewl.main.discord.configs.foxyconfig;
 import me.djjewl.main.discord.events.chatevents;
 import net.dv8tion.jda.api.JDA;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.function.Supplier;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 
 public final class Main extends JavaPlugin {
 

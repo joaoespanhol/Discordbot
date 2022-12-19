@@ -3,12 +3,16 @@ package me.djjewl.main.discord.events;
 
 
 import me.djjewl.main.discord.discordbot;
+import me.djjewl.main.discord.configs.foxyconfig;
+import org.apache.commons.lang.text.StrSubstitutor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.Map;
 
 
 public class chatevents implements Listener {
@@ -17,7 +21,13 @@ public class chatevents implements Listener {
     //On player Chat Send Chat Message to Discord.
     @EventHandler
     public void chatEvent(AsyncPlayerChatEvent event) {
-        String message = event.getPlayer().getName() + ": " + event.getMessage();
+        String format = foxyconfig.minecraft_to_discord;
+        Map<String, Object> replacementStrings = Map.of(
+                "user", event.getPlayer().getName(),
+                "message", event.getMessage()
+        );
+        StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
+        String message = sub.replace(format );
         discordbot.discordMsg(message);
     }
 
@@ -25,7 +35,13 @@ public class chatevents implements Listener {
     //On player Join Send Join Message to Discord
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        String message = event.getPlayer().getName() + " Joined.";
+
+        String format = foxyconfig.playerjoinformat;
+        Map<String, Object> replacementStrings = Map.of(
+                "user", event.getPlayer().getName()
+        );
+        StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
+        String message = sub.replace(format );
         discordbot.discordMsg(message);
 
 
@@ -35,7 +51,12 @@ public class chatevents implements Listener {
     //On player Leave Send Quit Message to Discord
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
-        String message = event.getPlayer().getName() + " Left. ";
+        String format = foxyconfig.playerleaveformat;
+        Map<String, Object> replacementStrings = Map.of(
+                "user", event.getPlayer().getName()
+        );
+        StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
+        String message = sub.replace(format );
         discordbot.discordMsg(message);
 
     }

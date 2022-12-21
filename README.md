@@ -13,4 +13,6 @@ Console From discord
 
 Rank Support for certain commands such as ban restart and so on
 
+Built in Advanced Bans Support
+
 

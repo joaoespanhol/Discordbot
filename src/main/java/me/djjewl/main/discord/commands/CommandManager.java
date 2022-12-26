@@ -10,10 +10,11 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
-import net.dv8tion.jda.api.requests.Response;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
+import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class CommandManager extends ListenerAdapter {
         //          DjJewl-12-16-2022 / 5:10PM
         //Returns Playerlist
         if(command.equals("playerlist")){
-            String players = String.valueOf(Bukkit.getOnlinePlayers().toString().replace("=","").replace("CraftPlayer","").replace("name","").replace("{","").replace("}",", "));
+            String players = Bukkit.getOnlinePlayers().toString().replace("=", "").replace("CraftPlayer", "").replace("name", "").replace("{", "").replace("}", ", ");
             event.reply("Playerlist!\n"+ players ).queue();
         }//end of playerlist
         //          DjJewl-12-16-2022 / 5:09PM
@@ -51,20 +52,20 @@ public class CommandManager extends ListenerAdapter {
             if(version.equals("1.18.2") || version.equals("1.12.2")) {
                 JsonElement Response = magmarequest.mvrequest(version);
                 EmbedBuilder eb = new EmbedBuilder();
-                eb.setTitle("Magma Version : "+version);
+                eb.setTitle("Magma Version : "+version +"Release ID " + Response.getAsJsonObject().get("name").getAsString());
                 eb.addField("Magma "+version+" Download", "[Download]"+"("+(Response.getAsJsonObject().get("link").getAsString().replaceAll("\"", ""))+")", false);
                 eb.addField("Magma "+version+" Changes", "[GitLab]"+"("+(Response.getAsJsonObject().get("git_commit_url").getAsString().replaceAll("\"", ""))+")", false);
                 eb.setAuthor("Magma", "https://magmafoundation.org/", "https://magmafoundation.org/images/magma-logo.png");
+                eb.setTimestamp((TemporalAccessor) Response.getAsJsonObject().get("created_at"));
                 eb.setFooter("Ownership of Files/Logo To Magma Development");
                 event.replyEmbeds(eb.build()).queue();
             }
        }//end of magma-version command
         //This will make a Embed that updates every 10 minutes with player count and if a server is on or not.
         //wont be worked on further until i feel like doing it,as i will need to make a seperate config using JSON,as ABCM does not have support for lists.
+        //waiting on a Create config operation in ABCM
         if(command.equals("create-server-status")){
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Server Status");
-            event.replyEmbeds(eb.build()).queue();
+            String ChanID = event.getChannel().getId();
         }
     }
     //          DjJewl-12-16-2022 / 5:10
@@ -85,7 +86,7 @@ public class CommandManager extends ListenerAdapter {
             StrSubstitutor sub = new StrSubstitutor(replacementStrings , "#", "#");
             String result = sub.replace(format );
             //end of Placeholder mape
-            getServer().broadcastMessage(result);
+            getServer().broadcastMessage(result);//Possible error needs to reply.
 
 
         }//end of Message Reacived

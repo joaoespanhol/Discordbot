@@ -2,6 +2,7 @@ package me.djjewl.main.discord.events;
 
 
 
+import com.destroystokyo.paper.event.player.PlayerAdvancementCriterionGrantEvent;
 import me.djjewl.main.discord.discordbot;
 import me.djjewl.main.discord.configs.foxyconfig;
 import org.apache.commons.lang.text.StrSubstitutor;
@@ -13,6 +14,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Map;
+
+import static me.djjewl.main.discord.configs.foxyconfig.advancementtodiscord;
 
 
 public class chatevents implements Listener {
@@ -66,4 +69,9 @@ public class chatevents implements Listener {
     public void onPlayerDead(PlayerDeathEvent event) {
         discordbot.discordMsg(event.getDeathMessage());
     }
+    //DJJEWL 7:20 12/26/2022
+    //On player achivement send message to discord if not disabled in config
+    @EventHandler
+    public void onPlayerAdvancementC(PlayerAdvancementCriterionGrantEvent event){if(advancementtodiscord)discordbot.discordMsg((event.getAdvancement()).toString());}
+
 }

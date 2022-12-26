@@ -19,6 +19,7 @@ public final class Main extends JavaPlugin {
             Config.init();
             Config.rescan(true);
             Config.save();
+            Config.rescan(true);
         } catch (ConfigInitException e) {
             for(Throwable cause : e.getCauses()){
                 System.out.println(cause);

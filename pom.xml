@@ -81,6 +81,11 @@
             <version>2.10</version>
         </dependency>
         <dependency>
+            <groupId>com.github.DevLeoko</groupId>
+            <artifactId>AdvancedBan</artifactId>
+            <version>v2.3.0</version>
+        </dependency>
+        <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.18.2-R0.1-SNAPSHOT</version>
@@ -94,7 +99,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>5.0.0-alpha.22</version>
+            <version>5.0.0-beta.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>club.minnced</groupId>

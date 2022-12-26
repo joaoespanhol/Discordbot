@@ -25,4 +25,6 @@ public final class foxyconfig {
     public static String playerleaveformat;
     @ConfigField(defaultValue = "#user# has joined!",description = "Formats the discord to minecraft (you can change chat colors here to using default minecraft color codes,THIS IS NOT CURRENTLY WORKING.")
     public static String playerjoinformat;
+    @ConfigField(defaultValue = "true",description = "Allows or denys messages about player advancements to discord")
+    public static Boolean advancementtodiscord;
 }
